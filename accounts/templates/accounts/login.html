@@ -1,5 +1,41 @@
 {% extends 'base.html' %}
 
 {% block content %}
-Login!
+
+    {% if error %}
+        {{ error }}
+    <br/>
+    <br/>
+    {% endif %}
+
+
+    <h1> Log In </h1>
+
+    <form method="POST" action="{% url 'login' %}">
+<!--        Protects from attacks-->
+        {% csrf_token %}
+
+        <label for="username">Username:</label>
+
+        <br/>
+
+        <input type="text" name="username" />
+
+        <br/>
+        <br/>
+
+        <label for="password">Password:</label>
+
+        <br/>
+
+        <input type="password" name="password" />
+
+        <br/>
+        <br/>
+
+        <input class="bt btn-danger "type="submit" value="Log In" />
+
+
+    </form>
+
 {% endblock %}

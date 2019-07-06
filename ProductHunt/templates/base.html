@@ -36,7 +36,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="{% url 'home' %}">
                 <img src="{% static 'logo.png' %} " class="d-inline-block align-top" height=30 width=30 />
                 Product Hunt
             </a>
@@ -47,9 +47,19 @@
 
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav ml-auto">
+                    {% if user.is_authenticated %}
 
-                    <a class="nav-item nav-link active" href="#">Sign Up</a>
-                    <a class="nav-item nav-link active" href="#">Log In</a>
+                        <a class="nav-item nav-link active" href="javascript:{document.getElementById('logout').submit()}" onclick="">Log Out</a>
+
+                        <form id="logout" method="POST" action="{% url 'logout' %}">
+                            {% csrf_token %}
+                            <input type="hidden"/>
+                        </form>
+
+                    {% else %}
+                        <a class="nav-item nav-link active" href="{% url 'signup' %}">Sign Up</a>
+                        <a class="nav-item nav-link active" href="{% url 'login' %}">Log In</a>
+                    {% endif %}
 
                 </div>
             </div>
@@ -75,6 +85,7 @@
         <p class="float-right">
             <a href="#">Back to top</a>
         </p>
+        <hr/>
         <p> © Faiza Ahsan {% now "Y" %} </p>
     </div>
 </footer>
