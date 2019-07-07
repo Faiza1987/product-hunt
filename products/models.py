@@ -6,12 +6,12 @@ from django.contrib.auth.models import User
 class Product(models.Model):
 
     title = models.CharField(max_length=225)
-    url = models.TextField()
+    body = models.TextField(max_length=500)
     pub_date = models.DateTimeField()
-    votes_total = models.IntegerField(default=1)
+    url = models.TextField()
     image = models.ImageField(upload_to='images/')
     icon = models.ImageField(upload_to='images/')
-    body = models.TextField(max_length=500)
+    votes_total = models.IntegerField(default=1)
     hunter = models.ForeignKey(User, on_delete=models.CASCADE)
 
 
